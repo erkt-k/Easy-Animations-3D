@@ -23,7 +23,6 @@ public class Scale : MonoBehaviour
     void Start()
     {
         m_initialScale = transform.localScale;
-
         StartCoroutine(AnimRoutine());
     }
 
