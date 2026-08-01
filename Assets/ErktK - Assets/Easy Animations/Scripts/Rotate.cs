@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rotate : MonoBehaviour
 {
     [Header("Animation Settings")]
+    [SerializeField] bool repeat = true;
     [Tooltip("The angle to rotate to. It uses vector3 not Quaternion angles.")]
     [SerializeField] Vector3 m_toAngle = Vector3.zero;
     [SerializeField] float m_duration = 0.2f;
@@ -12,7 +13,6 @@ public class Rotate : MonoBehaviour
 
     void Start()
     {
-        DOTween.Init();
         StartCoroutine(AnimSequence());
     }
 
@@ -23,10 +23,10 @@ public class Rotate : MonoBehaviour
 
     IEnumerator AnimSequence()
     {
-        while(true)
+        do
         {
             RotateAnim();
             yield return new WaitForSeconds(m_duration + 0.2f);
-        }
+        } while(repeat);
     }
 }

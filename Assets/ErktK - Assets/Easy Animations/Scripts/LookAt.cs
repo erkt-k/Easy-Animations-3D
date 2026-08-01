@@ -20,8 +20,6 @@ public class LookAt : MonoBehaviour
 
     void Start()
     {
-        DOTween.Init();
-        
         if(!m_isDynamic)
         {
             LookAtAnim();

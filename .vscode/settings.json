@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Asset Builder.slnx"
+    "dotnet.defaultSolution": "Easy Animations 3D.slnx"
 }

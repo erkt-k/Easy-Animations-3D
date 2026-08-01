@@ -6,6 +6,7 @@ using System.Collections;
 public class PositionShake : MonoBehaviour
 {
     [Header("Animation Properties")]
+    [SerializeField] bool repeat = true;
     [Tooltip("How long the animation is")]
     [SerializeField] float m_duration = 0.8f;
     [Tooltip("The strength of animation in each axis. (Set 0 if you want the axis to stay still.)")]
@@ -21,7 +22,6 @@ public class PositionShake : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        DOTween.Init();
         StartCoroutine(AnimSequence());
     }
 
@@ -39,10 +39,10 @@ public class PositionShake : MonoBehaviour
 
     IEnumerator AnimSequence()
     {
-        while(true)
+        do
         {
-            yield return new WaitForSeconds(m_duration + 0.3f);
             PositionShakeAnim();
-        }
+            yield return new WaitForSeconds(m_duration + 0.3f);
+        } while(repeat);
     }
 }

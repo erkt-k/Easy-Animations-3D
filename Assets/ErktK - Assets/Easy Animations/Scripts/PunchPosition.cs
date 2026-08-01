@@ -5,6 +5,7 @@ using DG.Tweening;
 public class PunchPosition : MonoBehaviour
 {
     [Header("Animation Properties")]
+    [SerializeField] bool repeat = true;
     [Tooltip("The direction and strength of animation in each axis.")]
     [SerializeField] Vector3 m_punch = new Vector3(0f, 0.2f, 0f);
 
@@ -23,7 +24,6 @@ public class PunchPosition : MonoBehaviour
 
     void Start()
     {
-        DOTween.Init();
         StartCoroutine(AnimSequence());
     }
 
@@ -40,10 +40,10 @@ public class PunchPosition : MonoBehaviour
 
     IEnumerator AnimSequence()
     {
-        while(true)
+        do
         {
             yield return new WaitForSeconds(m_duration + 0.3f);
             PositionPunchAnim();
-        }
+        } while(true);
     }
 }

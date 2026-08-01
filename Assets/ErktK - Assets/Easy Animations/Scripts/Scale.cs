@@ -23,7 +23,7 @@ public class Scale : MonoBehaviour
     void Start()
     {
         m_initialScale = transform.localScale;
-        DOTween.Init();
+
         StartCoroutine(AnimRoutine());
     }
 

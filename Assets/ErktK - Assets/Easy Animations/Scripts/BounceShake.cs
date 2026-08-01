@@ -8,6 +8,7 @@ using UnityEditor.EditorTools;
 public class BounceAnimation : MonoBehaviour
 {
     [Header("Animation Properties")]
+    [SerializeField] bool repeat = true;
     [Tooltip("How long the animation is")]
     [SerializeField] float m_duration = 0.8f;
     [Tooltip("The strength of animation in each axis. (Set 0 if you want the axis to stay still.)")]
@@ -23,7 +24,6 @@ public class BounceAnimation : MonoBehaviour
 
     void Start()
     {
-        DOTween.Init();
         StartCoroutine(AnimSequence());
     }
 
@@ -41,10 +41,10 @@ public class BounceAnimation : MonoBehaviour
 
     IEnumerator AnimSequence()
     {
-        while(true)
+        do
         {
-            yield return new WaitForSeconds(m_duration + 0.3f);
             BounceAnim();
-        }
+            yield return new WaitForSeconds(m_duration + 0.3f);
+        } while(repeat);
     }
 }

@@ -32,7 +32,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         m_initialPosition = transform.position;
-        DOTween.Init();
+
         StartCoroutine(AnimRoutine());
     }
 
