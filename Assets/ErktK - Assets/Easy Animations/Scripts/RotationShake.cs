@@ -6,7 +6,7 @@ using System.Collections;
 public class ShakeAnimation : MonoBehaviour
 {
     [Header("Animation Properties")]
-    [SerializeField] bool repeat = true;
+    [SerializeField] bool m_repeat = true;
     [Tooltip("How long the animation is")]
     [SerializeField] float m_duration = 0.8f;
     [Tooltip("The strength of animation in each axis. (Set 0 if you want the axis to stay still.)")]
@@ -43,6 +43,6 @@ public class ShakeAnimation : MonoBehaviour
         {
             RotateAnim();
             yield return new WaitForSeconds(m_duration + 0.3f);
-        } while(repeat);
+        } while(m_repeat);
     }
 }

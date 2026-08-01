@@ -11,8 +11,8 @@ using UnityEngine.UIElements;
 public class Move : MonoBehaviour
 {
     [Header("Animation Settings")]
-    [Tooltip("Does the animation repeat?")]
-    [SerializeField] bool repeat = true;
+    [Tooltip("Does the animation m_repeat?")]
+    [SerializeField] bool m_repeat = true;
     [Tooltip("The position to move to. Has priority over transform")]
     [SerializeField] Vector3 m_toPosition = Vector3.zero;
 
@@ -61,6 +61,6 @@ public class Move : MonoBehaviour
                 transform.DOMove(m_initialPosition, m_duration, m_snapping);
             }
             yield return new WaitForSeconds(m_duration + 0.2f);
-        } while(repeat);
+        } while(m_repeat);
     }
 }

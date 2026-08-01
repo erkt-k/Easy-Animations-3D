@@ -5,8 +5,8 @@ using System.Collections;
 public class Scale : MonoBehaviour
 {
     [Header("Animation Settings")]
-    [Tooltip("Does the animation repeat?")]
-    [SerializeField] bool repeat = true;
+    [Tooltip("Does the animation m_repeat?")]
+    [SerializeField] bool m_repeat = true;
     [Tooltip("The scale to change to. Has priority over uniform value.")]
     [SerializeField] Vector3 m_toScale = Vector3.zero;
 
@@ -51,6 +51,6 @@ public class Scale : MonoBehaviour
                 transform.DOScale(m_initialScale, m_duration);
             }
             yield return new WaitForSeconds(m_duration + 0.2f);
-        } while(repeat);
+        } while(m_repeat);
     }
 }
