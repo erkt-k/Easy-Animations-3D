@@ -1,0 +1,308 @@
+using UnityEngine;
+using UnityEditor;
+using Unity.VisualScripting;
+using System;
+
+[CustomEditor(typeof(EasyAnimationPlayer))]
+public class EasyAnimate : Editor
+{
+    private Type m_ComponentToAdd = typeof(Null);
+    private EasyAnimationPlayer eaPlayer;
+    void OnEnable()
+    {
+        if (eaPlayer == null) eaPlayer = (EasyAnimationPlayer) target;
+    }
+
+    void AddMenuItem(GenericMenu menu, string menuPath, Type type)
+    {
+        menu.AddItem(new GUIContent(menuPath), m_ComponentToAdd.Equals(type), OnComponentSelected, type);
+    }
+
+    void OnComponentSelected(object component)
+    {
+        m_ComponentToAdd =(Type) component;
+
+        if (eaPlayer == null) eaPlayer = (EasyAnimationPlayer) target;
+        if (m_ComponentToAdd != null) eaPlayer.gameObject.AddComponent(m_ComponentToAdd);
+    }
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        
+        // Get the component from target
+        if(eaPlayer == null) eaPlayer = (EasyAnimationPlayer) target;
+
+        GUILayout.Label("Animations", EditorStyles.boldLabel);
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("Add Animation", GUILayout.Width(100));
+
+        // Draw the dropdown button
+        if (EditorGUILayout.DropdownButton(new GUIContent(eaPlayer.m_ComponentToAdd),
+                                    FocusType.Keyboard,
+                                    EditorStyles.popup))
+        {
+            GenericMenu menu = new GenericMenu();
+
+            AddMenuItem(menu, "Select", typeof(Null));
+/*
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "AudioMixer/DOSetFloat", "DOSetFloat");
+            
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "AudioSource/DOFade", "DOFade");
+            AddMenuItem(menu, "AudioSource/DOPitch", "DOPitch");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Camera/DOAspect", "DOAspect");
+            AddMenuItem(menu, "Camera/DOColor", "DOColor");
+            AddMenuItem(menu, "Camera/DOFarClipPlane", "DOFarClipPlane");
+            AddMenuItem(menu, "Camera/DOFieldOfView", "DOFieldOfView");
+            AddMenuItem(menu, "Camera/DONearClipPlane", "DONearClipPlane");
+            AddMenuItem(menu, "Camera/DOOrthoSize", "DOOrthoSize");
+            AddMenuItem(menu, "Camera/DOPixelRect", "DOPixelRect");
+            AddMenuItem(menu, "Camera/DORect", "DORect");
+            AddMenuItem(menu, "Camera/DOShakePosition", "DOShakePosition");
+            AddMenuItem(menu, "Camera/DOShakeRotation", "DOShakeRotation");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Light/DOColor", "DOColor");
+            AddMenuItem(menu, "Light/DOIntensity", "DOIntensity");
+            AddMenuItem(menu, "Light/DOShadowStrength", "DOShadowStrength");
+
+            AddMenuItem(menu, "Light/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "LineRenderer/DOColor", "DOColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Material/DOColor", "DOColor");
+            AddMenuItem(menu, "Material/DOFade", "DOFade");
+            AddMenuItem(menu, "Material/DOFloat", "DOFloats");
+            AddMenuItem(menu, "Material/DOGradientColor", "DOGradientColor");
+            AddMenuItem(menu, "Material/DOOffset", "DOOffset");
+            AddMenuItem(menu, "Material/DOTiling", "DOTiling");
+            AddMenuItem(menu, "Material/DOVector", "DOVector");
+            
+            menu.AddSeparator("Material/");
+
+            AddMenuItem(menu, "Material/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Rigidbody/Move/DOMove", );
+            AddMenuItem(menu, "Rigidbody/Move/DOMoveX", "DOMoveX");
+            AddMenuItem(menu, "Rigidbody/Move/DOMoveY", "DOMoveY");
+            AddMenuItem(menu, "Rigidbody/Move/DOMoveZ", "DOMoveZ");
+            AddMenuItem(menu, "Rigidbody/Move/DOJump", "DOJump");
+
+            menu.AddSeparator("Rigidbody/");
+            
+            AddMenuItem(menu, "Rigidbody/Rotate/DORotate", "DORotate");
+            AddMenuItem(menu, "Rigidbody/Rotate/DOLookAt", "DOLookAt");
+
+            menu.AddSeparator("Rigidbody/");
+
+            AddMenuItem(menu, "Rigidbody/Path/DOPath", "DOPath");
+            AddMenuItem(menu, "Rigidbody/Path/DOLocalPath", "DOLocalPath");
+
+            menu.AddSeparator("Rigidbody/");
+
+            AddMenuItem(menu, "Rigidbody/Pro Only/DOSpiral", "DOSpiral");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Rigidbody2D/Move/DOMove", "DOMove");
+            AddMenuItem(menu, "Rigidbody2D/Move/DOMoveX", "DOMoveX");
+            AddMenuItem(menu, "Rigidbody2D/Move/DOMoveY", "DOMoveY");
+            AddMenuItem(menu, "Rigidbody2D/Move/DOJump", "DOJump");
+
+            menu.AddSeparator("Rigidbody2D/");
+            
+            AddMenuItem(menu, "Rigidbody2D/Rotate/DORotate", "DORotate");
+
+            menu.AddSeparator("Rigidbody2D/");
+
+            AddMenuItem(menu, "Rigidbody2D/Path/DOPath", "DOPath");
+            AddMenuItem(menu, "Rigidbody2D/Path/DOLocalPath", "DOLocalPath");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "SpriteRenderer/DOColor", "DOColor");
+            AddMenuItem(menu, "SpriteRenderer/DOFade", "DOFade");
+            AddMenuItem(menu, "SpriteRenderer/DOGradientColor", "DOGradientColor");
+
+            menu.AddSeparator("SpriteRenderer/");
+
+            AddMenuItem(menu, "SpriteRenderer/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "TrailRenderer/DOResize", "DOResize");
+            AddMenuItem(menu, "TrailRenderer/DOTime", "DOTime");
+
+            menu.AddSeparator("");
+*/
+            AddMenuItem(menu, "Transform/Move/DOMove", typeof(EasyMove));
+/*            AddMenuItem(menu, "Transform/Move/DOMoveX", "DOMoveX");
+            AddMenuItem(menu, "Transform/Move/DOMoveY", "DOMoveY");
+            AddMenuItem(menu, "Transform/Move/DOMoveZ", "DOMoveZ");
+            AddMenuItem(menu, "Transform/Move/DOLocalMove", "DOLocalMove");
+            AddMenuItem(menu, "Transform/Move/DOLocalMoveX", "DOLocalMoveX");
+            AddMenuItem(menu, "Transform/Move/DOLocalMoveY", "DOLocalMoveY");
+            AddMenuItem(menu, "Transform/Move/DOLocalMoveZ", "DOLocalMoveZ");
+            AddMenuItem(menu, "Transform/Move/DOJump", "DOJump");
+            AddMenuItem(menu, "Transform/Move/DOLocalJump", "DOLocalJump"); 
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/Rotate/DORotate", "DORotate");
+            AddMenuItem(menu, "Transform/Rotate/DORotateQuaternion", "DORotateQuaternion");
+            AddMenuItem(menu, "Transform/Rotate/DOLocalRotate", "DOLocalRotate");
+            AddMenuItem(menu, "Transform/Rotate/DOLocalRotateQuaternion", "DOLocalRotateQuaternion");
+            AddMenuItem(menu, "Transform/Rotate/DOLookAt", "DOLookAt");
+            AddMenuItem(menu, "Transform/Rotate/DODynamicLookAt", "DODynamicLookAt");
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/Scale/DOScale", "DOScale");
+            AddMenuItem(menu, "Transform/Scale/DOScaleX", "DOScaleX");
+            AddMenuItem(menu, "Transform/Scale/DOScaleY", "DOScaleY");
+            AddMenuItem(menu, "Transform/Scale/DOScaleZ", "DOScaleZ");
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/Punch/DOPunchPosition", "DOPunchPosition");
+            AddMenuItem(menu, "Transform/Punch/DOPunchRotation", "DOPunchRotation");
+            AddMenuItem(menu, "Transform/Punch/DOPunchScale", "DOPunchScale");
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/Shake/DOShakePosition", "DOShakePosition");
+            AddMenuItem(menu, "Transform/Shake/DOShakeRotation", "DOShakeRotation");
+            AddMenuItem(menu, "Transform/Shake/DOShakeScale", "DOShakeScale");
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/Path/DOPath", "DOPath");
+            AddMenuItem(menu, "Transform/Path/DOLocalPath", "DOLocalPath");
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/Blendable Tweens/DOBlendableMoveBy", "DOBlendableMoveBy");
+            AddMenuItem(menu, "Transform/Blendable Tweens/DOBlendableLocalMoveBy", "DOBlendableLocalMoveBy");
+            AddMenuItem(menu, "Transform/Blendable Tweens/DOBlendableRotateBy", "DOBlendableRotateBy");
+            AddMenuItem(menu, "Transform/Blendable Tweens/DOBlendableLocalRotateBy", "DOBlendableLocalRotateBy");
+            AddMenuItem(menu, "Transform/Blendable Tweens/DOBlendableScaleBy", "DOBlendableScaleBy");
+
+            menu.AddSeparator("Transform/");
+
+            AddMenuItem(menu, "Transform/PRO Only/Spiral/DOSpiral", "DOSpiral");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Tween/DOTimeScale", "DOTimeScale");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "CanvasGroup/DOFade", "DOFade");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Graphic/DOColor", "DOColor");
+            AddMenuItem(menu, "Graphic/DOFade", "DOFade");
+
+            menu.AddSeparator("Graphic/");
+
+            AddMenuItem(menu, "Graphic/BlendableTweens/DOBlendableColor", "DOBlendableColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Image/DOColor", "DOColor");
+            AddMenuItem(menu, "Image/DOFade", "DOFade");
+            AddMenuItem(menu, "Image/DOFillAmount", "DOFillAmount");
+            AddMenuItem(menu, "Image/DOGradientColor", "DOGradientColor");
+
+            menu.AddSeparator("Image/");
+
+            AddMenuItem(menu, "Image/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "LayoutElement/DOFlexibleSize", "DOFlexibleSize");
+            AddMenuItem(menu, "LayoutElement/DOMinSize", "DOMinSize");
+            AddMenuItem(menu, "LayoutElement/DOPrefferedSize", "DOPrefferedSize");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Outline/DOColor", "DOColor");
+            AddMenuItem(menu, "Outline/DOFade", "DOFade");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "RectTransform/DOAnchorMax", "DOAnchorMax");
+            AddMenuItem(menu, "RectTransform/DOAnchorMin", "DOAnchorMin");
+            AddMenuItem(menu, "RectTransform/DOAnchorPos", "DOAnchorPos");
+            AddMenuItem(menu, "RectTransform/DOAnchorPosX", "DOAnchorPosX");
+            AddMenuItem(menu, "RectTransform/DOAnchorPosY", "DOAnchorPosY");
+            AddMenuItem(menu, "RectTransform/DOAnchorPos3D", "DOAnchorPos3D");
+            AddMenuItem(menu, "RectTransform/DOAnchorPos3DX", "DOAnchorPos3DX");
+            AddMenuItem(menu, "RectTransform/DOAnchorPos3DY", "DOAnchorPos3DY");
+            AddMenuItem(menu, "RectTransform/DOAnchorPos3DZ", "DOAnchorPos3DZ");
+            AddMenuItem(menu, "RectTransform/DOJumpAnchorPos", "DOJumpAnchorPos");
+            AddMenuItem(menu, "RectTransform/DOPivot", "DOPivot");
+            AddMenuItem(menu, "RectTransform/DOPivotX", "DOPivotX");
+            AddMenuItem(menu, "RectTransform/DOPivotY", "DOPivotY");
+            AddMenuItem(menu, "RectTransform/DOPunchAnchorPos", "DOPunchAnchorPos");
+            AddMenuItem(menu, "RectTransform/DOShakeAnchorPos", "DOShakeAnchorPos");
+            AddMenuItem(menu, "RectTransform/DOSizeDelta", "DOSizeDelta");
+            
+            menu.AddSeparator("RectTransform/");
+            
+            AddMenuItem(menu, "RectTransform/Shape Tweens/DOShapeCircle", "DOShapeCircle");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "ScrollRect/DONormalizedPos", "DONormalizedPos");
+            AddMenuItem(menu, "ScrollRect/DOHorizontalNormalizedPos", "DOHorizontalNormalizedPos");
+            AddMenuItem(menu, "ScrollRect/DOVerticalPos", "DOVerticalPos");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Slider/DOValue", "DOValue");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Text/DOColor", "DOColor");
+            AddMenuItem(menu, "Text/DOFade", "DOFade");
+            AddMenuItem(menu, "Text/DOText", "DOText");
+
+            menu.AddSeparator("Text/");
+
+            AddMenuItem(menu, "Text/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "VisualElement/DOMove", "DOMove");
+            AddMenuItem(menu, "VisualElement/DOMoveX", "DOMoveX");
+            AddMenuItem(menu, "VisualElement/DOMoveY", "DOMoveY");
+            AddMenuItem(menu, "VisualElement/DOMoveZ", "DOMoveZ");
+            AddMenuItem(menu, "VisualElement/DORotate", "DORotate");
+            AddMenuItem(menu, "VisualElement/DOScale", "DOScale");
+            AddMenuItem(menu, "VisualElement/DOPunch", "DOPunch");
+            AddMenuItem(menu, "VisualElements/DOShake", "DOShake");
+
+            Debug.Log(m_ComponentToAdd + " will be added to the " + target.name);
+*/
+            menu.ShowAsContext();
+        }
+        
+        EditorGUILayout.EndHorizontal();
+    }
+}
