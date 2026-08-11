@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,60 +5,26 @@ using UnityEngine;
 [AddComponentMenu("EasyAnimation")]
 public class EasyAnimationPlayer : MonoBehaviour
 {
-    [SerializeField] LoopType _loopType = LoopType.Restart;
-    [SerializeField] int _loopAmount = 0;
-
-    // s
-    [HideInInspector] List<Tween> _animationSteps;
-    [HideInInspector] public string m_ComponentToAdd = "EasyMove";
-    [SerializeField] bool _playOnAwake = true;
-    float _interval = 0f;
-    float Interval
-    {
-        get => _interval;
-        set
-        {
-            _interval = Mathf.Max(0, value);
-        }
-    }
+    /* 
+        TODO: I can add a property to flag if the user wants to run onvalidate in EasyAnimation or not here.
+        EasyAnimation would have a parameter? that tracks the EasyAnimationPlayer component that added them and pulls the bool to check if they want to play with OnValidate or not.
+    */
     
-    private Sequence seq;
-    public Sequence Seq { get => seq; }
-
     void Awake()
     {
-        DOTween.Init();
-        _animationSteps = new List<Tween>();
+        DOTween.Init(recycleAllByDefault: false);
     }
 
-    void Start()
-    {
-        seq = DOTween.Sequence();
-        seq.SetId(this);
-        foreach(Tween step in _animationSteps)
-        {
-            if(step.target.Equals(transform)) step.SetTarget(transform);
-            seq.Append(step);
-        }
-        seq.SetLoops(_loopAmount, _loopType);
-        seq.AppendInterval(_interval);
-        if (_playOnAwake) Play();
-    }
-
+    /// <summary>
+    /// Gets every <b> Easy Animation </b> component the gameObject has and plays them.
+    /// </summary>
     public void Play()
     {
-        if (seq.IsPlaying()) return;
-        seq.Play();
-    }
+        EasyAnimation[] animations = transform.GetComponents<EasyAnimation>();
 
-    void OnEnable()
-    {
-        Play();
-    }
-
-    void OnDestroy()
-    {
-        seq.Complete();
-        seq.Kill();
+        foreach (EasyAnimation anim in animations)
+        {
+            anim.Play();
+        }
     }
 }

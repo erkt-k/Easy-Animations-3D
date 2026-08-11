@@ -5022,6 +5022,7 @@ GameObject:
   - component: {fileID: 3820714895310883133}
   - component: {fileID: 1360386969080462839}
   - component: {fileID: 3820714895310883135}
+  - component: {fileID: 3820714895310883136}
   m_Layer: 0
   m_Name: 'Shake Bounce '
   m_TagString: Untagged
@@ -5216,10 +5217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c2a49f5cee41541bad9133e5a6634e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EasyAnimationPlayer
-  _loopType: 0
-  _loopAmount: 0
-  m_ComponentToAdd: EasyMove
-  _playOnAwake: 1
 --- !u!1 &919132148415853395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5588,6 +5585,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2071784757354742240}
+  - component: {fileID: 2071784757354742241}
+  - component: {fileID: 2071784757354742242}
   m_Layer: 0
   m_Name: Test Character
   m_TagString: Untagged
@@ -6171,6 +6170,65 @@ Transform:
   - {fileID: 2799126813324888692}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2071784757354742241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696632126449032026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ca1d54212fbabf48acf48bb50513045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestBehaviourTempScript
+  target: {fileID: 3820714895310883135}
+--- !u!114 &2071784757354742242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696632126449032026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 1101a5eb40360f14b86943f370f11e84, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2071784757354742241}
+        m_TargetAssemblyTypeName: TestBehaviourTempScript, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bc48297a-b211-4774-bca6-f07546726023
+    m_ActionName: 'Click/Fire[/Mouse/leftButton]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Click
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2088977251856381124
 GameObject:
   m_ObjectHideFlags: 0
@@ -7404,10 +7462,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c2a49f5cee41541bad9133e5a6634e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EasyAnimationPlayer
-  _loopType: 0
-  _loopAmount: 0
-  m_ComponentToAdd: EasyMove
-  _playOnAwake: 1
+--- !u!114 &3820714895310883136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712110583858846754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bed6ef274473d8458919bdec93dbb1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EasyTransformMove
+  m_repeat: 0
+  m_playOnAwake: 0
+  m_duration: 0.5
+  m_snapping: 0
+  m_doesReturnHome: 1
+  m_loopAmount: 0
+  m_loopType: 1
+  m_moveOption: 0
+  m_toPosition: {x: 5, y: 0, z: 0}
+  m_toTransform: {fileID: 0}
 --- !u!4 &3851151690739712167
 Transform:
   m_ObjectHideFlags: 0

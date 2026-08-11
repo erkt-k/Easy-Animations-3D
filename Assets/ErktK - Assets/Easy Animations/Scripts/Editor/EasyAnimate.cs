@@ -38,7 +38,7 @@ public class EasyAnimate : Editor
         GUILayout.Label("Add Animation", GUILayout.Width(100));
 
         // Draw the dropdown button
-        if (EditorGUILayout.DropdownButton(new GUIContent(eaPlayer.m_ComponentToAdd),
+        if (EditorGUILayout.DropdownButton(new GUIContent("Select an animation to add"),
                                     FocusType.Keyboard,
                                     EditorStyles.popup))
         {
@@ -149,7 +149,7 @@ public class EasyAnimate : Editor
 
             menu.AddSeparator("");
 */
-            AddMenuItem(menu, "Transform/Move/DOMove", typeof(EasyMove));
+            AddMenuItem(menu, "Transform/Move/DOMove", typeof(EasyTransformMove));
 /*            AddMenuItem(menu, "Transform/Move/DOMoveX", "DOMoveX");
             AddMenuItem(menu, "Transform/Move/DOMoveY", "DOMoveY");
             AddMenuItem(menu, "Transform/Move/DOMoveZ", "DOMoveZ");

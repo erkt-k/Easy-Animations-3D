@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "TempActions",
+    "maps": [
+        {
+            "name": "Click",
+            "id": "33e35805-3364-491e-9677-ed7f2ba90cc3",
+            "actions": [
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "bc48297a-b211-4774-bca6-f07546726023",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "102023cb-f6fb-448f-9dc9-dd0862f8e42f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
