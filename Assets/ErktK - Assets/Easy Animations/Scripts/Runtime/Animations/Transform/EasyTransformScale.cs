@@ -1,57 +1,56 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
+using UnityEditor.EditorTools;
+using UnityEngine.UIElements;
+using UnityEngine.Lumin;
 
 [AddComponentMenu("")]
-public class Scale : MonoBehaviour
+public class EasyTransformScale : EasyAnimation
 {
-    [Header("Animation Settings")]
-    [Tooltip("Does the animation m_repeat?")]
-    [SerializeField] bool m_repeat = true;
-    [Tooltip("The scale to change to. Has priority over uniform value.")]
-    [SerializeField] Vector3 m_toScale = Vector3.zero;
+    enum ScaleOption {V3, Uniform}
 
-    [Tooltip("Scales uniformly. Vector3 other than 0, has priority.")]
-    [SerializeField] float m_toScaleUniformly;
+    [Tooltip("Which way to scale?")]
+    [SerializeField] ScaleOption scaleOption = ScaleOption.Uniform;
 
-    [Tooltip("Duration of the movement.")]
-    [SerializeField] float m_duration = 0.5f;
+    [Tooltip("The scale to change to.")]
+    [SerializeField] Vector3 m_toScale = Vector3.one;
 
-    [Tooltip("True: Returns to initial scale.")]
-    [SerializeField] bool doesReturnNormal = false;
+    [Tooltip("Scales uniformly.s")]
+    [SerializeField] float m_toScaleUniformly = 1f;
+
     private Vector3 m_initialScale;
 
-    void Start()
+    void Awake()
     {
         m_initialScale = transform.localScale;
-        StartCoroutine(AnimRoutine());
     }
 
-    void MoveAnimation()
+    public override Tween Play()
     {
-        if(!m_toScale.Equals(Vector3.zero)) // Does the vector have a value?
+        CleanUp();
+
+        switch(scaleOption)
         {
-            transform.DOScale(m_toScale, m_duration);
-        } else
-        {
-            if(m_toScale != null)
-            {
-                transform.DOScale(m_toScaleUniformly, m_duration);
-            }
+            case ScaleOption.Uniform:
+                m_tw = transform.DOScale(m_toScaleUniformly, m_duration)
+                                .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
+                                .OnComplete(() =>
+                                {
+                                    m_tw = null;
+                                    if (m_doesReturnHome) transform.DOScale(m_initialScale, m_duration);
+                                });
+                return m_tw;
+            case ScaleOption.V3:
+                m_tw = transform.DOScale(m_toScale, m_duration)
+                                .SetLoops(m_repeat ? -1 : 0, m_loopType)
+                                .OnComplete(() =>
+                                {
+                                    m_tw = null;
+                                    if (m_doesReturnHome) transform.DOScale(m_initialScale, m_duration);
+                                });
+                return m_tw;
+            default:
+                return null;
         }
-    }
-
-    IEnumerator AnimRoutine()
-    {
-        do
-        {
-            MoveAnimation();
-            if (doesReturnNormal)
-            {
-                yield return new WaitForSeconds(m_duration);
-                transform.DOScale(m_initialScale, m_duration);
-            }
-            yield return new WaitForSeconds(m_duration + 0.2f);
-        } while(m_repeat);
     }
 }

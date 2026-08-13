@@ -1,14 +1,9 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 
 [AddComponentMenu("")]
-public class BounceAnimation : MonoBehaviour
+public class EasyShakeScale : EasyAnimation
 {
-    [Header("Animation Properties")]
-    [SerializeField] bool m_repeat = true;
-    [Tooltip("How long the animation is")]
-    [SerializeField] float m_duration = 0.8f;
     [Tooltip("The strength of animation in each axis. (Set 0 if you want the axis to stay still.)")]
     [SerializeField] Vector3 m_strength = new Vector3(0f, 0.2f, 0f);
     [Tooltip("How much will the shake vibrate")]
@@ -19,30 +14,24 @@ public class BounceAnimation : MonoBehaviour
     [SerializeField] bool m_fadeOut = true;
     [Tooltip("Full (fully random) or Harmonic (more balanced and visually more pleasant).")]
     [SerializeField] ShakeRandomnessMode m_shakeRndMode = ShakeRandomnessMode.Harmonic;
+    private Vector3 m_initialScale;
 
-    void Start()
+    void Awake()
     {
-        StartCoroutine(AnimSequence());
+        m_initialScale = transform.localScale;
     }
 
-    void BounceAnim()
+    public override Tween Play()
     {
-        transform.DOShakeScale(
-            duration: m_duration,
-            strength: m_strength,
-            vibrato: m_vibrato,
-            randomness: m_randomness,
-            fadeOut: m_fadeOut,
-            randomnessMode: m_shakeRndMode
-        );
-    }
+        CleanUp();
 
-    IEnumerator AnimSequence()
-    {
-        do
-        {
-            BounceAnim();
-            yield return new WaitForSeconds(m_duration + 0.3f);
-        } while(m_repeat);
+        m_tw = transform.DOShakeScale(m_duration, m_strength, m_vibrato, m_randomness, m_fadeOut, m_shakeRndMode)
+                        .SetLoops(m_repeat ? -1 : 0, m_loopType)
+                        .OnComplete(() =>
+                        {
+                            m_tw = null;
+                            if (m_doesReturnHome) transform.DOScale(m_initialScale, m_duration);
+                        });
+        return m_tw;
     }
 }

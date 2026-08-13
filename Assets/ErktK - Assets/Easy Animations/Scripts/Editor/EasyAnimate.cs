@@ -146,48 +146,45 @@ public class EasyAnimate : Editor
 
             AddMenuItem(menu, "TrailRenderer/DOResize", "DOResize");
             AddMenuItem(menu, "TrailRenderer/DOTime", "DOTime");
-
-            menu.AddSeparator("");
 */
+            menu.AddSeparator("");
+
             AddMenuItem(menu, "Transform/Move/DOMove", typeof(EasyTransformMove));
-/*            AddMenuItem(menu, "Transform/Move/DOMoveX", "DOMoveX");
-            AddMenuItem(menu, "Transform/Move/DOMoveY", "DOMoveY");
-            AddMenuItem(menu, "Transform/Move/DOMoveZ", "DOMoveZ");
-            AddMenuItem(menu, "Transform/Move/DOLocalMove", "DOLocalMove");
-            AddMenuItem(menu, "Transform/Move/DOLocalMoveX", "DOLocalMoveX");
-            AddMenuItem(menu, "Transform/Move/DOLocalMoveY", "DOLocalMoveY");
-            AddMenuItem(menu, "Transform/Move/DOLocalMoveZ", "DOLocalMoveZ");
+            AddMenuItem(menu, "Transform/Move/DOMoveXYZ", typeof(EasyTransformMoveXYZ));
+
+            AddMenuItem(menu, "Transform/Move/DOLocalMove", typeof(EasyTransformLocalMove));
+            AddMenuItem(menu, "Transform/Move/DOLocalMoveXYZ", typeof(EasyTransformLocalMoveXYZ));
+
+/*
             AddMenuItem(menu, "Transform/Move/DOJump", "DOJump");
             AddMenuItem(menu, "Transform/Move/DOLocalJump", "DOLocalJump"); 
-
+*/
             menu.AddSeparator("Transform/");
 
-            AddMenuItem(menu, "Transform/Rotate/DORotate", "DORotate");
-            AddMenuItem(menu, "Transform/Rotate/DORotateQuaternion", "DORotateQuaternion");
-            AddMenuItem(menu, "Transform/Rotate/DOLocalRotate", "DOLocalRotate");
-            AddMenuItem(menu, "Transform/Rotate/DOLocalRotateQuaternion", "DOLocalRotateQuaternion");
+            AddMenuItem(menu, "Transform/Rotate/DORotate", typeof(EasyTransformRotateAngles));
+            AddMenuItem(menu, "Transform/Rotate/DOLocalRotate", typeof(EasyTransformRotateLocalAngles));
+/*
             AddMenuItem(menu, "Transform/Rotate/DOLookAt", "DOLookAt");
             AddMenuItem(menu, "Transform/Rotate/DODynamicLookAt", "DODynamicLookAt");
+*/
 
             menu.AddSeparator("Transform/");
 
-            AddMenuItem(menu, "Transform/Scale/DOScale", "DOScale");
-            AddMenuItem(menu, "Transform/Scale/DOScaleX", "DOScaleX");
-            AddMenuItem(menu, "Transform/Scale/DOScaleY", "DOScaleY");
-            AddMenuItem(menu, "Transform/Scale/DOScaleZ", "DOScaleZ");
+            AddMenuItem(menu, "Transform/Scale/DOScale", typeof(EasyTransformScale));
+            AddMenuItem(menu, "Transform/Scale/DOScaleXYZ", typeof(EasyTransformScaleXYZ));
 
             menu.AddSeparator("Transform/");
 
-            AddMenuItem(menu, "Transform/Punch/DOPunchPosition", "DOPunchPosition");
-            AddMenuItem(menu, "Transform/Punch/DOPunchRotation", "DOPunchRotation");
-            AddMenuItem(menu, "Transform/Punch/DOPunchScale", "DOPunchScale");
+            AddMenuItem(menu, "Transform/Punch/DOPunchPosition", typeof(EasyPunchPosition));
+            AddMenuItem(menu, "Transform/Punch/DOPunchRotation", typeof(EasyPunchRotation));
+            AddMenuItem(menu, "Transform/Punch/DOPunchScale", typeof(EasyPunchScale));
 
             menu.AddSeparator("Transform/");
 
-            AddMenuItem(menu, "Transform/Shake/DOShakePosition", "DOShakePosition");
-            AddMenuItem(menu, "Transform/Shake/DOShakeRotation", "DOShakeRotation");
-            AddMenuItem(menu, "Transform/Shake/DOShakeScale", "DOShakeScale");
-
+            AddMenuItem(menu, "Transform/Shake/DOShakePosition", typeof(EasyShakePosition));
+            AddMenuItem(menu, "Transform/Shake/DOShakeRotation", typeof(EasyShakeRotation));
+            AddMenuItem(menu, "Transform/Shake/DOShakeScale", typeof(EasyShakeScale));
+/*
             menu.AddSeparator("Transform/");
 
             AddMenuItem(menu, "Transform/Path/DOPath", "DOPath");

@@ -56,11 +56,7 @@ public abstract class EasyAnimation : MonoBehaviour
 
     public virtual void UpdateAnimation()
     {
-        if (m_tw != null)
-        {
-            m_tw.Kill();
-            m_tw = null;
-        }
+        CleanUp();
 
         m_tw = Play();
     }
@@ -78,5 +74,14 @@ public abstract class EasyAnimation : MonoBehaviour
     public virtual void Pause()
     {
         Play()?.Pause();
+    }
+
+    public virtual void CleanUp()
+    {
+        if (m_tw != null)
+        {
+            m_tw.Kill();
+            m_tw = null;
+        }
     }
 }

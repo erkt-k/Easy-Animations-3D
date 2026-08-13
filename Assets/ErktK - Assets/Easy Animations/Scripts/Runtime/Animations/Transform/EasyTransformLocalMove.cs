@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 
 [AddComponentMenu("")]
-public class EasyTransformMove : EasyAnimation
+public class EasyTransformLocalMove : EasyAnimation
 {
 
     enum MoveOption {V3, Transform}
@@ -20,7 +20,7 @@ public class EasyTransformMove : EasyAnimation
 
     void Awake()
     {
-        m_initialPos = transform.position;
+        m_initialPos = transform.localPosition;
     }
 
     public override Tween Play()
@@ -30,26 +30,26 @@ public class EasyTransformMove : EasyAnimation
         switch(m_moveOption)
         {
             case MoveOption.V3:
-                m_tw = transform.DOMove(m_toPosition, m_duration, m_snapping)
+                m_tw = transform.DOLocalMove(m_toPosition, m_duration, m_snapping)
                             .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
                             {
                                 m_tw = null;
                                 if (m_doesReturnHome)
                                 {
-                                    transform.DOMove(m_initialPos, m_duration, m_snapping);
+                                    transform.DOLocalMove(m_initialPos, m_duration, m_snapping);
                                 }
                             });
                 return m_tw;
             case MoveOption.Transform:
-                m_tw = transform.DOMove(m_toTransform.position, m_duration, m_snapping)
+                m_tw = transform.DOLocalMove(m_toTransform.localPosition, m_duration, m_snapping)
                             .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
                             {
                                 m_tw = null;
                                 if (m_doesReturnHome)
                                 {
-                                    transform.DOMove(m_initialPos, m_duration, m_snapping);
+                                    transform.DOLocalMove(m_initialPos, m_duration, m_snapping);
                                 }
                             });
                 return m_tw;
