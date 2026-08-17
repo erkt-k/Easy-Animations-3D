@@ -19,7 +19,7 @@ public class EasyCameraPixelRect : EasyAnimation
         CleanUp();
 
         m_tw = m_camera.DORect(m_toPixelRect, m_duration)
-                    .SetLoops(m_repeat ? -1 : 0, m_loopType)
+                    .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                     .OnComplete(() =>
                     {
                         m_tw = null;

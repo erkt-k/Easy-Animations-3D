@@ -69,11 +69,13 @@ public abstract class EasyAnimation : MonoBehaviour
     }
 
     /// <summary>
-    /// Uses the Play function and pauses the returned Tween.
+    /// If m_tw is <b> NOT null</b>, pauses it.
+    /// If it is, calls <b>Play()</b> and then pauses it. 
     /// </summary>
     public virtual void Pause()
     {
-        Play()?.Pause();
+        if (m_tw != null) m_tw.Pause();
+        else Play()?.Pause();
     }
 
     public virtual void CleanUp()

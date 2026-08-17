@@ -20,7 +20,7 @@ public class EasyAnimate : Editor
 
     void OnComponentSelected(object component)
     {
-        m_ComponentToAdd =(Type) component;
+        m_ComponentToAdd = component.GetType();
 
         if (eaPlayer == null) eaPlayer = (EasyAnimationPlayer) target;
         if (m_ComponentToAdd != null) eaPlayer.gameObject.AddComponent(m_ComponentToAdd);
@@ -205,11 +205,11 @@ public class EasyAnimate : Editor
             menu.AddSeparator("");
 
             AddMenuItem(menu, "Tween/DOTimeScale", "DOTimeScale");
-
+*/
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "CanvasGroup/DOFade", "DOFade");
-
+            AddMenuItem(menu, "CanvasGroup/DOFade", typeof(EasyCanvasGroupFade));
+/*
             menu.AddSeparator("");
 
             AddMenuItem(menu, "Graphic/DOColor", "DOColor");

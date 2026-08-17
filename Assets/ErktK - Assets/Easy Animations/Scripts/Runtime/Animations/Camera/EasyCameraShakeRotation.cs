@@ -34,7 +34,7 @@ public class EasyCameraShakeRotation : EasyAnimation
         {
             case StrengthOption.V3:
                 m_tw = m_camera.DOShakeRotation(m_duration, m_strength, m_vibrato, m_randomness, m_fadeOut, m_shakeRndMode)
-                            .SetLoops(m_repeat ? -1 : 0, m_loopType)
+                            .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
                             {
                                 m_tw = null;
@@ -44,7 +44,7 @@ public class EasyCameraShakeRotation : EasyAnimation
                 break;
             case StrengthOption.Uniform:
                 m_tw = m_camera.DOShakeRotation(m_duration, m_strengthUniform, m_vibrato, m_randomness, m_fadeOut, m_shakeRndMode)
-                            .SetLoops(m_repeat ? -1 : 0, m_loopType)
+                            .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
                             {
                                 m_tw = null;
