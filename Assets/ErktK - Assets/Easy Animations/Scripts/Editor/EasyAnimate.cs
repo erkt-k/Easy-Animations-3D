@@ -6,7 +6,7 @@ using System;
 [CustomEditor(typeof(EasyAnimationPlayer))]
 public class EasyAnimate : Editor
 {
-    private Type m_ComponentToAdd = typeof(Null);
+    private Type m_ComponentToAdd;
     private EasyAnimationPlayer eaPlayer;
     void OnEnable()
     {
@@ -45,29 +45,29 @@ public class EasyAnimate : Editor
             GenericMenu menu = new GenericMenu();
 
             AddMenuItem(menu, "Select", typeof(Null));
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "AudioMixer/DOSetFloat", typeof(EasyAudioMixerSetFloat));
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "AudioSource/DOFade", typeof(EasyAudioSourceFade));
+            AddMenuItem(menu, "AudioSource/DOPitch", typeof(EasyAudioSourcePitch));
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Camera/DOAspect", typeof(EasyCameraAspect));
+            AddMenuItem(menu, "Camera/DOColor", typeof(EasyCameraColor));
+            AddMenuItem(menu, "Camera/DOFarClipPlane", typeof(EasyCameraFarClipPlane));
+            AddMenuItem(menu, "Camera/DOFieldOfView", typeof(EasyCameraFieldOfView));
+            AddMenuItem(menu, "Camera/DONearClipPlane", typeof(EasyCameraNearClipPlane));
+            AddMenuItem(menu, "Camera/DOOrthoSize", typeof(EasyCameraOrthoSize));
+            AddMenuItem(menu, "Camera/DOPixelRect", typeof(EasyCameraPixelRect));
+            AddMenuItem(menu, "Camera/DORect", typeof(EasyCameraRect));
+            AddMenuItem(menu, "Camera/DOShakePosition", typeof(EasyCameraShakePosition));
+            AddMenuItem(menu, "Camera/DOShakeRotation", typeof(EasyCameraShakeRotation));
 /*
-            menu.AddSeparator("");
-
-            AddMenuItem(menu, "AudioMixer/DOSetFloat", "DOSetFloat");
-            
-            menu.AddSeparator("");
-
-            AddMenuItem(menu, "AudioSource/DOFade", "DOFade");
-            AddMenuItem(menu, "AudioSource/DOPitch", "DOPitch");
-
-            menu.AddSeparator("");
-
-            AddMenuItem(menu, "Camera/DOAspect", "DOAspect");
-            AddMenuItem(menu, "Camera/DOColor", "DOColor");
-            AddMenuItem(menu, "Camera/DOFarClipPlane", "DOFarClipPlane");
-            AddMenuItem(menu, "Camera/DOFieldOfView", "DOFieldOfView");
-            AddMenuItem(menu, "Camera/DONearClipPlane", "DONearClipPlane");
-            AddMenuItem(menu, "Camera/DOOrthoSize", "DOOrthoSize");
-            AddMenuItem(menu, "Camera/DOPixelRect", "DOPixelRect");
-            AddMenuItem(menu, "Camera/DORect", "DORect");
-            AddMenuItem(menu, "Camera/DOShakePosition", "DOShakePosition");
-            AddMenuItem(menu, "Camera/DOShakeRotation", "DOShakeRotation");
-
             menu.AddSeparator("");
 
             AddMenuItem(menu, "Light/DOColor", "DOColor");
