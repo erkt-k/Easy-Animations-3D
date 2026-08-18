@@ -15,7 +15,11 @@ public class EasyAnimate : Editor
 
     void AddMenuItem(GenericMenu menu, string menuPath, Type type)
     {
-        menu.AddItem(new GUIContent(menuPath), m_ComponentToAdd.Equals(type), OnComponentSelected, type);
+        if (m_ComponentToAdd == null) m_ComponentToAdd = typeof(Null);
+        menu.AddItem(
+            new GUIContent(menuPath), // Content to add (the path in this case)
+            m_ComponentToAdd.Equals(type), // Should I put a tick next to it? (yes if it is the component selected)
+            OnComponentSelected, type); // The funct to call when an item is selected and it's param
     }
 
     void OnComponentSelected(object component)
@@ -67,19 +71,19 @@ public class EasyAnimate : Editor
             AddMenuItem(menu, "Camera/DORect", typeof(EasyCameraRect));
             AddMenuItem(menu, "Camera/DOShakePosition", typeof(EasyCameraShakePosition));
             AddMenuItem(menu, "Camera/DOShakeRotation", typeof(EasyCameraShakeRotation));
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "Light/DOColor", typeof(EasyLightColor));
+            AddMenuItem(menu, "Light/DOIntensity", typeof(EasyLightIntensity));
+            AddMenuItem(menu, "Light/DOShadowStrength", typeof(EasyLightShadowStrength));
+
+            AddMenuItem(menu, "Light/Blendable Tweens/DOBlendableColor", typeof(EasyLightBlendableColor));
+
+            menu.AddSeparator("");
+
+            AddMenuItem(menu, "LineRenderer/DOColor", typeof(EasyLineRendererColor));
 /*
-            menu.AddSeparator("");
-
-            AddMenuItem(menu, "Light/DOColor", "DOColor");
-            AddMenuItem(menu, "Light/DOIntensity", "DOIntensity");
-            AddMenuItem(menu, "Light/DOShadowStrength", "DOShadowStrength");
-
-            AddMenuItem(menu, "Light/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
-
-            menu.AddSeparator("");
-
-            AddMenuItem(menu, "LineRenderer/DOColor", "DOColor");
-
             menu.AddSeparator("");
 
             AddMenuItem(menu, "Material/DOColor", "DOColor");
@@ -209,38 +213,38 @@ public class EasyAnimate : Editor
             menu.AddSeparator("");
 
             AddMenuItem(menu, "CanvasGroup/DOFade", typeof(EasyCanvasGroupFade));
-/*
+
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "Graphic/DOColor", "DOColor");
-            AddMenuItem(menu, "Graphic/DOFade", "DOFade");
-
+            AddMenuItem(menu, "Graphic/DOColor", typeof(EasyGraphicColor));
+            AddMenuItem(menu, "Graphic/DOFade", typeof(EasyGraphicFade));
+/*
             menu.AddSeparator("Graphic/");
 
             AddMenuItem(menu, "Graphic/BlendableTweens/DOBlendableColor", "DOBlendableColor");
-
+*/
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "Image/DOColor", "DOColor");
-            AddMenuItem(menu, "Image/DOFade", "DOFade");
-            AddMenuItem(menu, "Image/DOFillAmount", "DOFillAmount");
-            AddMenuItem(menu, "Image/DOGradientColor", "DOGradientColor");
+            AddMenuItem(menu, "Image/DOColor", typeof(EasyImageColor));
+            AddMenuItem(menu, "Image/DOFade", typeof(EasyImageFade));
+            AddMenuItem(menu, "Image/DOFillAmount", typeof(EasyImageFillAmount));
+//            AddMenuItem(menu, "Image/DOGradientColor", "DOGradientColor");
 
             menu.AddSeparator("Image/");
 
-            AddMenuItem(menu, "Image/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
+            AddMenuItem(menu, "Image/Blendable Tweens/DOBlendableColor", typeof(EasyImageBlendableColor));
 
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "LayoutElement/DOFlexibleSize", "DOFlexibleSize");
-            AddMenuItem(menu, "LayoutElement/DOMinSize", "DOMinSize");
-            AddMenuItem(menu, "LayoutElement/DOPrefferedSize", "DOPrefferedSize");
+            AddMenuItem(menu, "LayoutElement/DOFlexibleSize", typeof(EasyLayoutElementFlexibleSize));
+            AddMenuItem(menu, "LayoutElement/DOMinSize", typeof(EasyLayoutElementMinSize));
+            AddMenuItem(menu, "LayoutElement/DOPrefferedSize", typeof(EasyLayoutElementPrefferedSize));
 
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "Outline/DOColor", "DOColor");
-            AddMenuItem(menu, "Outline/DOFade", "DOFade");
-
+            AddMenuItem(menu, "Outline/DOColor", typeof(EasyOutlineColor));
+            AddMenuItem(menu, "Outline/DOFade", typeof(EasyOutlineFade));
+/*
             menu.AddSeparator("");
 
             AddMenuItem(menu, "RectTransform/DOAnchorMax", "DOAnchorMax");
