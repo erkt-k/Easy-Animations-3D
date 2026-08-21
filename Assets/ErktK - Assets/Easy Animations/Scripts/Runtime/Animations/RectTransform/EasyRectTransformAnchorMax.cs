@@ -25,6 +25,12 @@ public class EasyRectTransformAnchorMax : EasyAnimation
                                 m_tw = null;
 
                                 if(m_doesReturnHome) m_rectTransform.DOAnchorMax(m_initialAnchorMax, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if(m_doesReturnHome) m_rectTransform.anchorMax = m_initialAnchorMax;
                             });
 
         return m_tw;

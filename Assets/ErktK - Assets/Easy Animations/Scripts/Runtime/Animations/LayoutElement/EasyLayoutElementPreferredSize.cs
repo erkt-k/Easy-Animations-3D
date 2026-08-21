@@ -28,6 +28,16 @@ public class EasyLayoutElementPrefferedSize : EasyAnimation
                                 m_tw = null;
 
                                 if (m_doesReturnHome) m_layoutElement.DOPreferredSize(m_initialSize, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if (m_doesReturnHome)
+                                {
+                                    m_layoutElement.preferredWidth = m_initialSize[0];
+                                    m_layoutElement.preferredHeight = m_initialSize[1];
+                                }
                             });
         return m_tw;
     }

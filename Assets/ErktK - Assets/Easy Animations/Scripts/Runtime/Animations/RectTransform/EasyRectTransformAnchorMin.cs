@@ -25,6 +25,12 @@ public class EasyRectTransformAnchorMin : EasyAnimation
                                 m_tw = null;
 
                                 if(m_doesReturnHome) m_rectTransform.DOAnchorMin(m_initialAnchorMin, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if(m_doesReturnHome) m_rectTransform.anchorMin = m_initialAnchorMin;
                             });
 
         return m_tw;

@@ -1,12 +1,12 @@
 using UnityEngine;
 using DG.Tweening;
+using EasyAnimationsEnums;
 
 [AddComponentMenu(""), RequireComponent(typeof(RectTransform))]
 public class EasyRectTransformAnchorPosXY : EasyAnimation
 {
-    enum AxisOption {X, Y}
     [SerializeField] float m_toAnchorPos = 0f;
-    [SerializeField] AxisOption m_axisOption = AxisOption.X;
+    [SerializeField] AxisOption2D m_axisOption = AxisOption2D.X;
     private Vector2 m_initialAnchorPos;
     private RectTransform m_rectTransform;
 
@@ -22,7 +22,7 @@ public class EasyRectTransformAnchorPosXY : EasyAnimation
 
         switch (m_axisOption)
         {
-            case AxisOption.X:
+            case AxisOption2D.X:
                 m_tw = m_rectTransform.DOAnchorPosX(m_toAnchorPos, m_duration, m_snapping)
                             .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
@@ -30,9 +30,15 @@ public class EasyRectTransformAnchorPosXY : EasyAnimation
                                 m_tw = null;
 
                                 if(m_doesReturnHome) m_rectTransform.DOAnchorPosX(m_initialAnchorPos.x, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if(m_doesReturnHome) m_rectTransform.anchoredPosition = m_initialAnchorPos;
                             });
                 break;
-            case AxisOption.Y:
+            case AxisOption2D.Y:
                 m_tw = m_rectTransform.DOAnchorPosY(m_toAnchorPos, m_duration, m_snapping)
                             .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
@@ -40,6 +46,12 @@ public class EasyRectTransformAnchorPosXY : EasyAnimation
                                 m_tw = null;
 
                                 if(m_doesReturnHome) m_rectTransform.DOAnchorPosY(m_initialAnchorPos.y, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if(m_doesReturnHome) m_rectTransform.anchoredPosition = m_initialAnchorPos;
                             });
                 break;
             default:

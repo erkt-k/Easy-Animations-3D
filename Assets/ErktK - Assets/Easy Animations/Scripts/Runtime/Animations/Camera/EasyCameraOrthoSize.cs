@@ -25,6 +25,12 @@ public class EasyCameraOrthoSize : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DOOrthoSize(m_initialOrthoSize, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.orthographicSize = m_initialOrthoSize;
                     });
         return m_tw;
     }

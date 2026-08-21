@@ -25,6 +25,12 @@ public class EasyCameraFarClipPlane : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DOFarClipPlane(m_initialFarClipPlane, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.farClipPlane = m_initialFarClipPlane;
                     });
         return m_tw;
     }

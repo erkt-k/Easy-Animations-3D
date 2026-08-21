@@ -27,6 +27,12 @@ public class EasyGraphicColor : EasyAnimation
                             m_tw = null;
 
                             if (m_doesReturnHome) m_graphic.DOColor(m_initialColor, m_duration);
+                        })
+                        .OnKill(() =>
+                        {
+                            m_tw = null;
+
+                            if (m_doesReturnHome) m_graphic.color = m_initialColor;
                         });
 
         return m_tw;

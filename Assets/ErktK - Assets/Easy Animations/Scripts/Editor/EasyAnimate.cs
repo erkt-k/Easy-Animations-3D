@@ -97,45 +97,42 @@ public class EasyAnimate : Editor
             menu.AddSeparator("Material/");
 
             AddMenuItem(menu, "Material/Blendable Tweens/DOBlendableColor", "DOBlendableColor");
-
+*/
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "Rigidbody/Move/DOMove", );
-            AddMenuItem(menu, "Rigidbody/Move/DOMoveX", "DOMoveX");
-            AddMenuItem(menu, "Rigidbody/Move/DOMoveY", "DOMoveY");
-            AddMenuItem(menu, "Rigidbody/Move/DOMoveZ", "DOMoveZ");
-            AddMenuItem(menu, "Rigidbody/Move/DOJump", "DOJump");
+            AddMenuItem(menu, "Rigidbody/Move/DOMove", typeof(EasyRbMove));
+            AddMenuItem(menu, "Rigidbody/Move/DOMoveX", typeof(EasyRbMoveXYZ));
+//            AddMenuItem(menu, "Rigidbody/Move/DOJump", "DOJump");
 
             menu.AddSeparator("Rigidbody/");
             
-            AddMenuItem(menu, "Rigidbody/Rotate/DORotate", "DORotate");
-            AddMenuItem(menu, "Rigidbody/Rotate/DOLookAt", "DOLookAt");
+            AddMenuItem(menu, "Rigidbody/Rotate/DORotate", typeof(EasyRbRotate));
+            AddMenuItem(menu, "Rigidbody/Rotate/DOLookAt", typeof(EasyRbLookAt));
 
             menu.AddSeparator("Rigidbody/");
 
-            AddMenuItem(menu, "Rigidbody/Path/DOPath", "DOPath");
-            AddMenuItem(menu, "Rigidbody/Path/DOLocalPath", "DOLocalPath");
-
+            AddMenuItem(menu, "Rigidbody/Path/DOPath", typeof(EasyRbPath));
+            AddMenuItem(menu, "Rigidbody/Path/DOLocalPath", typeof(EasyRbLocalPath));
+/*
             menu.AddSeparator("Rigidbody/");
 
             AddMenuItem(menu, "Rigidbody/Pro Only/DOSpiral", "DOSpiral");
-
+*/
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "Rigidbody2D/Move/DOMove", "DOMove");
-            AddMenuItem(menu, "Rigidbody2D/Move/DOMoveX", "DOMoveX");
-            AddMenuItem(menu, "Rigidbody2D/Move/DOMoveY", "DOMoveY");
-            AddMenuItem(menu, "Rigidbody2D/Move/DOJump", "DOJump");
+            AddMenuItem(menu, "Rigidbody2D/Move/DOMove", typeof(EasyRb2DMove));
+            AddMenuItem(menu, "Rigidbody2D/Move/DOMoveXY", typeof(EasyRb2DMoveXY));
+//            AddMenuItem(menu, "Rigidbody2D/Move/DOJump", "DOJump");
 
             menu.AddSeparator("Rigidbody2D/");
             
-            AddMenuItem(menu, "Rigidbody2D/Rotate/DORotate", "DORotate");
+            AddMenuItem(menu, "Rigidbody2D/Rotate/DORotate", typeof(EasyRb2DRotate));
 
             menu.AddSeparator("Rigidbody2D/");
 
-            AddMenuItem(menu, "Rigidbody2D/Path/DOPath", "DOPath");
-            AddMenuItem(menu, "Rigidbody2D/Path/DOLocalPath", "DOLocalPath");
-
+            AddMenuItem(menu, "Rigidbody2D/Path/DOPath", typeof(EasyRb2DPath));
+            AddMenuItem(menu, "Rigidbody2D/Path/DOLocalPath", typeof(EasyRb2DLocalPath));
+/*
             menu.AddSeparator("");
 
             AddMenuItem(menu, "SpriteRenderer/DOColor", "DOColor");
@@ -244,36 +241,33 @@ public class EasyAnimate : Editor
 
             AddMenuItem(menu, "Outline/DOColor", typeof(EasyOutlineColor));
             AddMenuItem(menu, "Outline/DOFade", typeof(EasyOutlineFade));
-/*
+
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "RectTransform/DOAnchorMax", "DOAnchorMax");
-            AddMenuItem(menu, "RectTransform/DOAnchorMin", "DOAnchorMin");
-            AddMenuItem(menu, "RectTransform/DOAnchorPos", "DOAnchorPos");
-            AddMenuItem(menu, "RectTransform/DOAnchorPosX", "DOAnchorPosX");
-            AddMenuItem(menu, "RectTransform/DOAnchorPosY", "DOAnchorPosY");
-            AddMenuItem(menu, "RectTransform/DOAnchorPos3D", "DOAnchorPos3D");
-            AddMenuItem(menu, "RectTransform/DOAnchorPos3DX", "DOAnchorPos3DX");
-            AddMenuItem(menu, "RectTransform/DOAnchorPos3DY", "DOAnchorPos3DY");
-            AddMenuItem(menu, "RectTransform/DOAnchorPos3DZ", "DOAnchorPos3DZ");
-            AddMenuItem(menu, "RectTransform/DOJumpAnchorPos", "DOJumpAnchorPos");
-            AddMenuItem(menu, "RectTransform/DOPivot", "DOPivot");
-            AddMenuItem(menu, "RectTransform/DOPivotX", "DOPivotX");
-            AddMenuItem(menu, "RectTransform/DOPivotY", "DOPivotY");
-            AddMenuItem(menu, "RectTransform/DOPunchAnchorPos", "DOPunchAnchorPos");
-            AddMenuItem(menu, "RectTransform/DOShakeAnchorPos", "DOShakeAnchorPos");
-            AddMenuItem(menu, "RectTransform/DOSizeDelta", "DOSizeDelta");
+            AddMenuItem(menu, "RectTransform/DOAnchorMax", typeof(EasyRectTransformAnchorMax));
+            AddMenuItem(menu, "RectTransform/DOAnchorMin", typeof(EasyRectTransformAnchorMin));
+            AddMenuItem(menu, "RectTransform/DOAnchorPos", typeof(EasyRectTransformAnchorPos));
+            AddMenuItem(menu, "RectTransform/DOAnchorPosXY", typeof(EasyRectTransformAnchorPosXY));
+            AddMenuItem(menu, "RectTransform/DOAnchorPos3D", typeof(EasyRectTransformAnchorPos3D));
+            AddMenuItem(menu, "RectTransform/DOAnchorPos3DXYZ", typeof(EasyRectTransformAnchorPos3DXYZ));
+
+//            AddMenuItem(menu, "RectTransform/DOJumpAnchorPos", "DOJumpAnchorPos");
+            AddMenuItem(menu, "RectTransform/DOPivot", typeof(EasyRectTransformPivot));
+            AddMenuItem(menu, "RectTransform/DOPivotXY", typeof(EasyRectTransformPivotXY));
+            AddMenuItem(menu, "RectTransform/DOPunchAnchorPos", typeof(EasyRectTransformPunchAnchorPos));
+            AddMenuItem(menu, "RectTransform/DOShakeAnchorPos", typeof(EasyRectTransformShakeAnchorPos));
+            AddMenuItem(menu, "RectTransform/DOSizeDelta", typeof(EasyRectTransformSizeDelta));
             
             menu.AddSeparator("RectTransform/");
             
-            AddMenuItem(menu, "RectTransform/Shape Tweens/DOShapeCircle", "DOShapeCircle");
+            AddMenuItem(menu, "RectTransform/Shape Tweens/DOShapeCircle", typeof(EasyRectTransformShapeCircle));
 
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "ScrollRect/DONormalizedPos", "DONormalizedPos");
-            AddMenuItem(menu, "ScrollRect/DOHorizontalNormalizedPos", "DOHorizontalNormalizedPos");
-            AddMenuItem(menu, "ScrollRect/DOVerticalPos", "DOVerticalPos");
-
+            AddMenuItem(menu, "ScrollRect/DONormalizedPos", typeof(EasyScrollRectNormalizedPos));
+            AddMenuItem(menu, "ScrollRect/DOHorizontalNormalizedPos", typeof(EasyScrollRectHorizontalNormalizedPos));
+            AddMenuItem(menu, "ScrollRect/DOVerticalNormalizedPos", typeof(EasyScrollRectVerticalPos));
+/*
             menu.AddSeparator("");
 
             AddMenuItem(menu, "Slider/DOValue", "DOValue");

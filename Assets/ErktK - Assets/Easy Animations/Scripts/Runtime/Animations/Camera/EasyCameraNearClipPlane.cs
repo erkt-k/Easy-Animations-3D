@@ -25,6 +25,12 @@ public class EasyCameraNearClipPlane : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DONearClipPlane(m_initialNearClipPlane, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.nearClipPlane = m_initialNearClipPlane;
                     });
         return m_tw;
     }

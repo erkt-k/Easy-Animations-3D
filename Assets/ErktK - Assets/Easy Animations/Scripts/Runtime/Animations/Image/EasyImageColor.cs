@@ -28,7 +28,13 @@ public class EasyImageColor : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_image.DOBlendableColor(m_initialColor, m_duration);
-                    });
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_image.color = m_initialColor;
+                    });;
         return m_tw;
     }
 }

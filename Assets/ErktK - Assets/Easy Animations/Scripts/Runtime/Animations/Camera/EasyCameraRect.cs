@@ -25,6 +25,12 @@ public class EasyCameraRect : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DORect(m_initialRect, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.rect = m_initialRect;
                     });
         return m_tw;
     }

@@ -25,6 +25,12 @@ public class EasyCameraColor : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DOColor(m_initialColor, m_duration);
+                    })
+                    .OnComplete(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.backgroundColor = m_initialColor;
                     });
         return m_tw;
     }

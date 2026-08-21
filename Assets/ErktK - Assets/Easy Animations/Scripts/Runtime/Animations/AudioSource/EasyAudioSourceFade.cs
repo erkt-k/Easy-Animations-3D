@@ -27,6 +27,12 @@ public class EasyAudioSourceFade : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_source.DOFade(m_initialFloat, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if(m_doesReturnHome) m_source.volume = m_initialFloat;
                     });
         return m_tw;
     }

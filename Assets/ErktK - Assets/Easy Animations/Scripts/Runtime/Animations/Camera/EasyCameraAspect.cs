@@ -25,6 +25,12 @@ public class EasyCameraAspect : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DOAspect(m_initialAspect, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.aspect = m_initialAspect;
                     });
         return m_tw;
     }

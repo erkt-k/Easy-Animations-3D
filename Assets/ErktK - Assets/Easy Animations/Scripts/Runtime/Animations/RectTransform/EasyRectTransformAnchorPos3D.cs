@@ -25,6 +25,12 @@ public class EasyRectTransformAnchorPos3D : EasyAnimation
                                 m_tw = null;
 
                                 if(m_doesReturnHome) m_rectTransform.DOAnchorPos3D(m_initialAnchorPos, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if(m_doesReturnHome) m_rectTransform.anchoredPosition3D = m_initialAnchorPos;
                             });
 
         return m_tw;

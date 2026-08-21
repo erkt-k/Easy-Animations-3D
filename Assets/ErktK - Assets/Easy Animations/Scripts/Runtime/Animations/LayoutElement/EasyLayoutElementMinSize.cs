@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Unity.Android.Gradle.Manifest;
 
 [AddComponentMenu(""), RequireComponent(typeof(LayoutElement))]
 public class EasyLayoutElementMinSize : EasyAnimation
@@ -29,6 +28,16 @@ public class EasyLayoutElementMinSize : EasyAnimation
                                 m_tw = null;
 
                                 if (m_doesReturnHome) m_layoutElement.DOMinSize(m_initialSize, m_duration, m_snapping);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if (m_doesReturnHome)
+                                {
+                                    m_layoutElement.minWidth = m_initialSize[0];
+                                    m_layoutElement.minHeight = m_initialSize[1];
+                                }
                             });
         return m_tw;
     }

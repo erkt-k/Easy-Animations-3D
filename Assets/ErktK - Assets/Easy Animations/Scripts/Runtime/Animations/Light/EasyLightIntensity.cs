@@ -25,6 +25,12 @@ public class EasyLightIntensity : EasyAnimation
                         m_tw = null;
 
                         if(m_doesReturnHome) m_light.DOIntensity(m_initialIntensity, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if(m_doesReturnHome) m_light.intensity = m_initialIntensity;
                     });
         return m_tw;
     }

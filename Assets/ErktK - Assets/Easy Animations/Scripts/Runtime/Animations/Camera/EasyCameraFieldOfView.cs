@@ -25,6 +25,12 @@ public class EasyCameraFieldOfView : EasyAnimation
                         m_tw = null;
 
                         if (m_doesReturnHome) m_camera.DOFieldOfView(m_initialFieldOfView, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.fieldOfView = m_initialFieldOfView;
                     });
         return m_tw;
     }

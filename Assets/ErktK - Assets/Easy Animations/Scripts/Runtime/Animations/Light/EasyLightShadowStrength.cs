@@ -25,6 +25,12 @@ public class EasyLightShadowStrength : EasyAnimation
                         m_tw = null;
 
                         if(m_doesReturnHome) m_light.DOShadowStrength(m_initialStrength, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if(m_doesReturnHome) m_light.shadowStrength = m_initialStrength;
                     });
         return m_tw;
     }

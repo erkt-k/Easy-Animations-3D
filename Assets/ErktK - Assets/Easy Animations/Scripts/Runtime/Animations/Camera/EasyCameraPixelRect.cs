@@ -18,13 +18,19 @@ public class EasyCameraPixelRect : EasyAnimation
     {
         CleanUp();
 
-        m_tw = m_camera.DORect(m_toPixelRect, m_duration)
+        m_tw = m_camera.DOPixelRect(m_toPixelRect, m_duration)
                     .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                     .OnComplete(() =>
                     {
                         m_tw = null;
 
-                        if (m_doesReturnHome) m_camera.DORect(m_initialPixelRect, m_duration);
+                        if (m_doesReturnHome) m_camera.DOPixelRect(m_initialPixelRect, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if (m_doesReturnHome) m_camera.pixelRect = m_initialPixelRect;
                     });
         return m_tw;
     }

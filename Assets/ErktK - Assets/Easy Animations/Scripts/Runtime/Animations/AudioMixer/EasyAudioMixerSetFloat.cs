@@ -30,6 +30,11 @@ public class EasyAudioMixerSetFloat : EasyAnimation
                         {
                             m_tw = null;
                             if (m_doesReturnHome) m_audioMixer.DOSetFloat(m_floatName, m_initialFloat, m_duration);
+                        })
+                        .OnKill(() =>
+                        {
+                            m_tw = null;
+                            if (m_doesReturnHome) m_audioMixer.SetFloat(m_floatName, m_initialFloat);
                         });
 
         return m_tw;

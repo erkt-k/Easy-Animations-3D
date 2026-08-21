@@ -1,11 +1,11 @@
 using UnityEngine;
 using DG.Tweening;
+using EasyAnimationsEnums;
 
 [AddComponentMenu(""), RequireComponent(typeof(Camera))]
 public class EasyCameraShakePosition : EasyAnimation
 {
-    enum StrengthOption {V3, Uniform}
-    [SerializeField] StrengthOption m_strengthOption = StrengthOption.V3;
+    [SerializeField] MoveOption m_strengthOption = MoveOption.V3;
 
     [Tooltip("Allows you to choose the strength for each axis.")]
     [SerializeField] Vector3 m_strength = Vector3.zero;
@@ -32,7 +32,7 @@ public class EasyCameraShakePosition : EasyAnimation
 
         switch(m_strengthOption)
         {
-            case StrengthOption.V3:
+            case MoveOption.V3:
                 m_tw = m_camera.DOShakePosition(m_duration, m_strength, m_vibrato, m_randomness, m_fadeOut, m_shakeRndMode)
                             .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
@@ -40,9 +40,15 @@ public class EasyCameraShakePosition : EasyAnimation
                                 m_tw = null;
 
                                 if (m_doesReturnHome) transform.DOMove(m_initialPos, m_duration);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if (m_doesReturnHome) transform.position = m_initialPos;
                             });
                 break;
-            case StrengthOption.Uniform:
+            case MoveOption.Uniform:
                 m_tw = m_camera.DOShakePosition(m_duration, m_strengthUniform, m_vibrato, m_randomness, m_fadeOut, m_shakeRndMode)
                             .SetLoops(m_repeat ? -1 : m_loopAmount, m_loopType)
                             .OnComplete(() =>
@@ -50,6 +56,12 @@ public class EasyCameraShakePosition : EasyAnimation
                                 m_tw = null;
 
                                 if (m_doesReturnHome) transform.DOMove(m_initialPos, m_duration);
+                            })
+                            .OnKill(() =>
+                            {
+                                m_tw = null;
+
+                                if (m_doesReturnHome) transform.position = m_initialPos;
                             });
                 break;
             default:

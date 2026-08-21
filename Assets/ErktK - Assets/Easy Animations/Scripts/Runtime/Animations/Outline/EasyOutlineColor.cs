@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 [AddComponentMenu(""), RequireComponent(typeof(Outline))]
 public class EasyOutlineColor : EasyAnimation
@@ -26,6 +27,12 @@ public class EasyOutlineColor : EasyAnimation
                         m_tw = null;
 
                         if(m_doesReturnHome) m_outline.DOColor(m_initialColor, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if(m_doesReturnHome) m_outline.effectColor = m_initialColor;
                     });
         return m_tw;
     }

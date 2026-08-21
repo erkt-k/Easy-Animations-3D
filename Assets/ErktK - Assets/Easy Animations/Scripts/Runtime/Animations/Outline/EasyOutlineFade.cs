@@ -6,13 +6,13 @@ using DG.Tweening;
 public class EasyOutlineFade : EasyAnimation
 {
     [SerializeField] float m_toAlpha = 0f;
-    private float m_initialAlpha;
+    private Color m_initialColor;
     private Outline m_outline;
 
     void Awake()
     {
         m_outline = gameObject.GetComponent<Outline>();
-        m_initialAlpha = m_outline.effectColor.a;
+        m_initialColor = m_outline.effectColor;
     }
 
     public override Tween Play()
@@ -25,7 +25,13 @@ public class EasyOutlineFade : EasyAnimation
                     {
                         m_tw = null;
 
-                        if(m_doesReturnHome) m_outline.DOFade(m_initialAlpha, m_duration);
+                        if(m_doesReturnHome) m_outline.DOFade(m_initialColor.a, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if(m_doesReturnHome) m_outline.effectColor = m_initialColor;
                     });
         return m_tw;
     }

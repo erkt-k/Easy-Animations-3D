@@ -25,6 +25,12 @@ public class EasyLightBlendableColor : EasyAnimation
                         m_tw = null;
 
                         if(m_doesReturnHome) m_light.DOBlendableColor(m_initialColor, m_duration);
+                    })
+                    .OnKill(() =>
+                    {
+                        m_tw = null;
+
+                        if(m_doesReturnHome) m_light.color = m_initialColor;
                     });
         return m_tw;
     }
