@@ -267,11 +267,11 @@ public class EasyAnimate : Editor
             AddMenuItem(menu, "ScrollRect/DONormalizedPos", typeof(EasyScrollRectNormalizedPos));
             AddMenuItem(menu, "ScrollRect/DOHorizontalNormalizedPos", typeof(EasyScrollRectHorizontalNormalizedPos));
             AddMenuItem(menu, "ScrollRect/DOVerticalNormalizedPos", typeof(EasyScrollRectVerticalPos));
-/*
+
             menu.AddSeparator("");
 
-            AddMenuItem(menu, "Slider/DOValue", "DOValue");
-
+            AddMenuItem(menu, "Slider/DOValue", typeof(EasySliderValue));
+/*
             menu.AddSeparator("");
 
             AddMenuItem(menu, "Text/DOColor", "DOColor");
